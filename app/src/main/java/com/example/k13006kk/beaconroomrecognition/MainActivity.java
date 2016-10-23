@@ -1,6 +1,7 @@
 package com.example.k13006kk.beaconroomrecognition;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Bundle;
@@ -9,17 +10,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.k13006kk.mylibrary.BeaconHolder;
+import com.example.k13006kk.mylibrary.DBaccess;
 import com.example.k13006kk.mylibrary.UserColumns;
 
 public class MainActivity extends Activity {
 
     static BeaconHolder beaconinfo = BeaconHolder.getInstance();
+    DBaccess dBaccess = new DBaccess();
     public String[] stringArray = {" "," "," "," "};
+    public String[] backup = {" "," "," "," "};
+    public String[] room = {" "," "," "," "," "," "};
     Handler _handler = new Handler();
 
-    public String[] backup = {" "," "," "," "};
 
-    TextView tv1, tv2, tv3, tv4, tv5;
+    TextView tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,23 @@ public class MainActivity extends Activity {
 
             }
         }, 0);
+
+        final ContentResolver resolver = getContentResolver();
+        for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {
+            room[i] = dBaccess.monitoring(resolver)[i];
+        }
+
+        tv5 = (TextView) findViewById(R.id.toumei);
+        tv5.setText(room[1]);
+
+        tv6 = (TextView) findViewById(R.id.heyamei);
+        tv6.setText(room[2]);
+
+        tv7 = (TextView) findViewById(R.id.heyaban);
+        tv7.setText(room[3]);
+
+        tv8 = (TextView) findViewById(R.id.nichiji);
+        tv8.setText(room[4]);
     }
 
     ContentObserver mContentObserver = new ContentObserver(new Handler()) {
@@ -46,25 +67,34 @@ public class MainActivity extends Activity {
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
             // 変更された時の処理を書く
-            tv5 = (TextView) findViewById(R.id.state);
-            tv5.setText("入室　");
-            tv5 = (TextView) findViewById(R.id.state);
+            //tv5 = (TextView) findViewById(R.id.state);
+            //tv5.setText("入室　");
+            //tv5 = (TextView) findViewById(R.id.state);
             // オレンジ色
-            tv5.setTextColor(0xffff8c00);
+            //tv5.setTextColor(0xffff8c00);
+            //room = dBaccess.monitoring(resolver);
+            final ContentResolver resolver = getContentResolver();
+            for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {
+                room[i] = dBaccess.monitoring(resolver)[i];
+            }
+
+            tv5 = (TextView) findViewById(R.id.toumei);
+            tv5.setText(room[1]);
+
+            tv6 = (TextView) findViewById(R.id.heyamei);
+            tv6.setText(room[2]);
+
+            tv7 = (TextView) findViewById(R.id.heyaban);
+            tv7.setText(room[3]);
+
+            tv8 = (TextView) findViewById(R.id.nichiji);
+            tv8.setText(room[4]);
         }
     };
 
-    public void onClick(View view){
-        tv5 = (TextView) findViewById(R.id.state);
-        tv5.setText("部屋外");
-        tv5 = (TextView) findViewById(R.id.state);
-        // 水色
-        tv5.setTextColor(0xFF2C8DDB);
-    }
-
     public void beaconinfoView(){
 
-        for (int i = 0; i < beaconinfo.getTestString().length; i++) {   //(3)
+        for (int i = 0; i < beaconinfo.getTestString().length; i++) {
             stringArray[i] = beaconinfo.getTestString()[i];
         }
         //stringArray = beaconinfo.getTestString();
@@ -84,7 +114,7 @@ public class MainActivity extends Activity {
             tv4 = (TextView) findViewById(R.id.rssi);
             tv4.setText(stringArray[3]);
 
-            for (int i = 0; i < stringArray.length; i++) {   //(3)
+            for (int i = 0; i < stringArray.length; i++) {
                 backup[i] = stringArray[i];
             }
 
