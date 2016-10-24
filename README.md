@@ -39,8 +39,8 @@ BeaconRR.jarを使用しています。
   
 ## データベースの監視、情報の取得  
 このアプリではデータベースの監視、情報取得の両方を行っています。  
-*データベースからの情報取得*  
 
+*データベースからの情報取得*  
     final ContentResolver resolver = getContentResolver();  
     for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {  
         room[i] = dBaccess.monitoring(resolver)[i];  
