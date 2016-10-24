@@ -68,5 +68,5 @@ BeaconRR.jarを使用しています。
       super.onPause();  
       getContentResolver().unregisterContentObserver(mContentObserver);  
     }  
-上記のコードでデータベースの監視をこ行っています。  
+上記のコードでデータベースの監視を行っています。  
 コメントの場所に変更されたときの処理を書いてください。  
