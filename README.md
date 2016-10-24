@@ -41,9 +41,32 @@ BeaconRR.jarを使用しています。
 このアプリではデータベースの監視、情報取得の両方を行っています。  
 
 *データベースからの情報取得*  
+
     final ContentResolver resolver = getContentResolver();  
     for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {  
         room[i] = dBaccess.monitoring(resolver)[i];  
     }
 上記のコードでデータベースから情報を取得しています。  
 データベースには**0:キー番号 1:棟名 2:部屋名 3:部屋番号 4:日時**の順番で入っています。  
+
+*データベースの監視*  
+
+    ContentObserver mContentObserver = new ContentObserver(new Handler()) {  
+      @Override  
+      public void onChange(boolean selfChange) {  
+        super.onChange(selfChange);  
+        // 変更された時の処理を書く  
+      }  
+    };  
+    @Override  
+    protected void onResume() {  
+      super.onResume();  
+      getContentResolver().registerContentObserver(UserColumns.CONTENT_URI,true,mContentObserver);  
+    }  
+    @Override  
+    protected void onPause() {  
+      super.onPause();  
+      getContentResolver().unregisterContentObserver(mContentObserver);  
+    }  
+上記のコードでデータベースの監視をこ行っています。  
+コメントの場所に変更されたときの処理を書いてください。  
