@@ -37,3 +37,13 @@ BeaconRR.jarを使用しています。
 　　研究室内からは　`http://192.168.100.211/beacon_load.php`  
 　　愛工大内のwifiからは　`http://192.168.54.167:60000/beacon_load.php`  
   
+## データベースの監視、情報の取得  
+このアプリではデータベースの監視、情報取得の両方を行っています。  
+*データベースからの情報取得*  
+
+    final ContentResolver resolver = getContentResolver();  
+    for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {  
+        room[i] = dBaccess.monitoring(resolver)[i];  
+    }
+上記のコードでデータベースから情報を取得しています。  
+データベースには**0:キー番号 1:棟名 2:部屋名 3:部屋番号 4:日時**の順番で入っています。  
