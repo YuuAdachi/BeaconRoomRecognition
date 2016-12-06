@@ -18,7 +18,8 @@ public class Background extends Service {
     Context context;
 
     // 部屋情報DBへのアドレス
-    String url = "http://192.168.54.167:60000/beacon_load.php";//http://192.168.100.211/beacon_load.php
+    //String url = "http://192.168.54.167:60000/beacon_load.php";//http://192.168.100.211/beacon_load.php
+    String url = "http://192.168.100.211/beacon_load.php";//http://192.168.100.211/beacon_load.php
 
     @Override
     public void onCreate() {

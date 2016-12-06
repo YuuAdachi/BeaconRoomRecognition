@@ -326,7 +326,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="日時　　"
+                android:text="入室日時"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView17"
@@ -472,7 +472,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="日時　　"
+                android:text="退室日時"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView26"

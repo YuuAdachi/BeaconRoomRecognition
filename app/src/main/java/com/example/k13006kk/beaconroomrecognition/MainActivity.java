@@ -20,10 +20,12 @@ public class MainActivity extends Activity {
     public String[] stringArray = {" "," "," "," "};
     public String[] backup = {" "," "," "," "};
     public String[] room = {" "," "," "," "," "," "};
+    public String[] enterroom = new String[6];
+    public String[] exitroom = new String[6];
     Handler _handler = new Handler();
 
 
-    TextView tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8;
+    TextView tv1, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9, tv10, tv11, tv12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +47,36 @@ public class MainActivity extends Activity {
         }, 0);
 
         final ContentResolver resolver = getContentResolver();
-        for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {
-            room[i] = dBaccess.monitoring(resolver)[i];
+        for (int i = 0; i < dBaccess.getenterroom(resolver).length; i++) {
+            enterroom[i] = dBaccess.getenterroom(resolver)[i];
+        }
+        for (int i = 0; i < dBaccess.getexitroom(resolver).length; i++) {
+            exitroom[i] = dBaccess.getexitroom(resolver)[i];
         }
 
         tv5 = (TextView) findViewById(R.id.toumei);
-        tv5.setText(room[1]);
+        tv5.setText(enterroom[1]);
 
         tv6 = (TextView) findViewById(R.id.heyamei);
-        tv6.setText(room[2]);
+        tv6.setText(enterroom[2]);
 
         tv7 = (TextView) findViewById(R.id.heyaban);
-        tv7.setText(room[3]);
+        tv7.setText(enterroom[3]);
 
         tv8 = (TextView) findViewById(R.id.nichiji);
-        tv8.setText(room[4]);
+        tv8.setText(enterroom[4]);
+
+        tv9 = (TextView) findViewById(R.id.toumei2);
+        tv9.setText(exitroom[1]);
+
+        tv10 = (TextView) findViewById(R.id.heyamei2);
+        tv10.setText(exitroom[2]);
+
+        tv11 = (TextView) findViewById(R.id.heyaban2);
+        tv11.setText(exitroom[3]);
+
+        tv12 = (TextView) findViewById(R.id.nichiji2);
+        tv12.setText(exitroom[4]);
     }
 
     ContentObserver mContentObserver = new ContentObserver(new Handler()) {
@@ -67,28 +84,37 @@ public class MainActivity extends Activity {
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
             // 変更された時の処理を書く
-            //tv5 = (TextView) findViewById(R.id.state);
-            //tv5.setText("入室　");
-            //tv5 = (TextView) findViewById(R.id.state);
-            // オレンジ色
-            //tv5.setTextColor(0xffff8c00);
-            //room = dBaccess.monitoring(resolver);
             final ContentResolver resolver = getContentResolver();
-            for (int i = 0; i < dBaccess.monitoring(resolver).length; i++) {
-                room[i] = dBaccess.monitoring(resolver)[i];
+            for (int i = 0; i < dBaccess.getenterroom(resolver).length; i++) {
+                enterroom[i] = dBaccess.getenterroom(resolver)[i];
+            }
+            for (int i = 0; i < dBaccess.getexitroom(resolver).length; i++) {
+                exitroom[i] = dBaccess.getexitroom(resolver)[i];
             }
 
             tv5 = (TextView) findViewById(R.id.toumei);
-            tv5.setText(room[1]);
+            tv5.setText(enterroom[1]);
 
             tv6 = (TextView) findViewById(R.id.heyamei);
-            tv6.setText(room[2]);
+            tv6.setText(enterroom[2]);
 
             tv7 = (TextView) findViewById(R.id.heyaban);
-            tv7.setText(room[3]);
+            tv7.setText(enterroom[3]);
 
             tv8 = (TextView) findViewById(R.id.nichiji);
-            tv8.setText(room[4]);
+            tv8.setText(enterroom[4]);
+
+            tv9 = (TextView) findViewById(R.id.toumei2);
+            tv9.setText(exitroom[1]);
+
+            tv10 = (TextView) findViewById(R.id.heyamei2);
+            tv10.setText(exitroom[2]);
+
+            tv11 = (TextView) findViewById(R.id.heyaban2);
+            tv11.setText(exitroom[3]);
+
+            tv12 = (TextView) findViewById(R.id.nichiji2);
+            tv12.setText(exitroom[4]);
         }
     };
 
